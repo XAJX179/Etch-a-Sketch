@@ -10,9 +10,12 @@ function createDivs(line) {
       const divGrid = document.createElement("div");
       divLine.appendChild(divGrid);
       div.appendChild(divLine);
+      let x = 0.05;
 
       divGrid.addEventListener("mouseover", () => {
-        divGrid.style.background = "black";
+        divGrid.style.background = randomColors();
+        x += 0.1;
+        divGrid.style.opacity = x;
       });
     }
   }
@@ -35,3 +38,15 @@ function askUser() {
   }
 }
 btn.addEventListener("click", askUser);
+
+function randomColors() {
+  const color = "";
+  const min = 0;
+  const max = 255;
+
+  let r = Math.floor(Math.random() * 255);
+  let g = Math.floor(Math.random() * 255);
+  let b = Math.floor(Math.random() * 255);
+
+  return "rgb(" + r + "," + g + "," + b + ")";
+}
