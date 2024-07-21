@@ -3,14 +3,24 @@ div {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
+  margin: 100px;
+  padding: 50px;
 }
 div div {
   border: 0px;
   flex-direction: row;
+  margin: 0px;
+  padding: 0px;
 }
 div div div {
   border: 1px solid;
-  height: 20px;
-  width: 20px;
+  height: 14px;
+  width: 14px;
   background-color: rgb(221, 221, 221);
+  margin: 0px;
+  padding: 0px;
+}
+button {
+  margin: 2% 47%;
 }
