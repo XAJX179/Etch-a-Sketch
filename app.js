@@ -19,6 +19,7 @@ function createDivs(line) {
       const x = 700 / line - 2; //-2 -> removing border 2px
       divGrid.style.width = `` + x + "px";
       divGrid.style.height = `` + x + "px";
+      divGrid.addEventListener("click", onMouse);
     }
     div.appendChild(divLine);
   }
@@ -31,7 +32,7 @@ function removeGrids() {
   }
 }
 
-function askUser() {
+function askSize() {
   let size = +prompt("Enter Size: ");
   if (size <= 100 && size > 0) {
     removeGrids();
@@ -40,7 +41,7 @@ function askUser() {
     alert("Enter between 1 and 100");
   }
 }
-change.addEventListener("click", askUser);
+change.addEventListener("click", askSize);
 
 function randomColors() {
   const color = "";
@@ -54,10 +55,21 @@ function randomColors() {
   return "rgb(" + r + "," + g + "," + b + ")";
 }
 
-clear.addEventListener("click", clear);
+clear.addEventListener("click", clearFunc);
 
 choose.addEventListener("click", choose);
 
 opacity.addEventListener("click", opacity);
 
 random.addEventListener("click", random);
+
+function clearFunc() {
+  const divGridArray = Array.from(document.querySelectorAll("div div div"));
+  let i = 0;
+  while (divGridArray[i]) {
+    divGridArray[i].style.background = " rgb(221, 221, 221)";
+    i++;
+  }
+}
+
+function onMouse() {}
