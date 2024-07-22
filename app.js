@@ -2,6 +2,10 @@ const div = document.querySelector("div");
 
 const btn = Array.from(document.querySelectorAll("button"));
 
+let divGridColor = "";
+let divGridOpacity = "";
+let divGridRandomColor = false;
+
 const change = btn[0];
 const clear = btn[1];
 const choose = btn[2];
@@ -19,7 +23,19 @@ function createDivs(line) {
       const x = 700 / line - 2; //-2 -> removing border 2px
       divGrid.style.width = `` + x + "px";
       divGrid.style.height = `` + x + "px";
-      divGrid.addEventListener("click", onMouse);
+      divGrid.addEventListener("mouseover", function onMouse() {
+        divGrid.style.background = "black";
+        if (divGridColor != "") {
+          divGrid.style.background = divGridColor;
+        }
+        if (divGridOpacity != "") {
+          divGrid.style.opacity = divGridOpacity;
+        }
+        if (divGridRandomColor) {
+          divGrid.style.background = randomColors();
+          divGrid.style.opacity = divGridOpacity;
+        }
+      });
     }
     div.appendChild(divLine);
   }
@@ -57,19 +73,37 @@ function randomColors() {
 
 clear.addEventListener("click", clearFunc);
 
-choose.addEventListener("click", choose);
+choose.addEventListener("click", chooseFunc);
 
-opacity.addEventListener("click", opacity);
+opacity.addEventListener("click", opacityFunc);
 
-random.addEventListener("click", random);
+random.addEventListener("click", randomFunc);
 
 function clearFunc() {
   const divGridArray = Array.from(document.querySelectorAll("div div div"));
   let i = 0;
   while (divGridArray[i]) {
     divGridArray[i].style.background = " rgb(221, 221, 221)";
+    divGridArray[i].style.opacity = "1";
     i++;
   }
 }
 
-function onMouse() {}
+function randomFunc() {
+  divGridRandomColor = true;
+}
+function chooseFunc() {
+  let val = prompt(
+    "Enter a Color : name or #hex (#included) . eg- red or #ff0000"
+  );
+  divGridColor = val;
+  divGridRandomColor = false;
+}
+function opacityFunc() {
+  let val = +prompt("Enter a Opacity : 1 to 100");
+  if (val > 0 && val < 101) {
+    divGridOpacity = "" + val / 100;
+  } else {
+    alert("Only between 1 to 100.");
+  }
+}
