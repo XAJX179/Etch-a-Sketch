@@ -1,23 +1,26 @@
 const div = document.querySelector("div");
 
-const btn = document.querySelector("button");
+const btn = Array.from(document.querySelectorAll("button"));
+
+const change = btn[0];
+const clear = btn[1];
+const choose = btn[2];
+const opacity = btn[3];
+const random = btn[4];
 
 const divs = [];
 function createDivs(line) {
   for (let i = 0; i < line; i++) {
     const divLine = document.createElement("div");
-    for (let i = 0; i < line; i++) {
+
+    for (let j = 0; j < line; j++) {
       const divGrid = document.createElement("div");
       divLine.appendChild(divGrid);
-      div.appendChild(divLine);
-      let x = 0.05;
-
-      divGrid.addEventListener("mouseover", () => {
-        divGrid.style.background = randomColors();
-        x += 0.1;
-        divGrid.style.opacity = x;
-      });
+      const x = 700 / line - 2; //-2 -> removing border 2px
+      divGrid.style.width = `` + x + "px";
+      divGrid.style.height = `` + x + "px";
     }
+    div.appendChild(divLine);
   }
 }
 createDivs(16);
@@ -37,7 +40,7 @@ function askUser() {
     alert("Enter between 1 and 100");
   }
 }
-btn.addEventListener("click", askUser);
+change.addEventListener("click", askUser);
 
 function randomColors() {
   const color = "";
@@ -50,3 +53,11 @@ function randomColors() {
 
   return "rgb(" + r + "," + g + "," + b + ")";
 }
+
+clear.addEventListener("click", clear);
+
+choose.addEventListener("click", choose);
+
+opacity.addEventListener("click", opacity);
+
+random.addEventListener("click", random);
